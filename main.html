@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <script type="text/javascript" src="libraries/glMatrix-0.9.5.min.js"></script>
+    <script type="text/javascript" src="libraries/webgl-utils.js"></script>
+    <script type="text/javascript" src="libraries/webgl-obj-loader.js"></script>
+
+    <script id="vertexShader" type="x-shader/x-vertex">
+      attribute vec3 position;
+      attribute vec3 textureCoords;
+      attribute vec3 normalVec;
+
+      uniform mat4 projection;
+      uniform mat4 view;
+      uniform mat4 model;
+
+      varying vec3 finalTexCoords;
+
+      void main()
+      {
+        gl_Position = projection * view * model * vec4(position, 1.0);
+        finalTexCoords = textureCoords;
+      }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+      precision mediump float;
+
+      uniform sampler2D texture;
+
+      varying vec3 finalTexCoords;
+
+      void main()
+      {
+        gl_FragColor = texture2D(texture, vec2(finalTexCoords.s, finalTexCoords.t));
+      }
+    </script>
+
+    <script type="text/javascript" src="glInit.js"></script>
+    <script type="text/javascript" src="render.js"></script>
+
+  </head>
+
+  <body>
+
+    <canvas id="mainGame" style="border:none;" width="1024" height="768"></canvas>
+    <br>
+
+
+  </body>
+
+  <div id="fish_mesh_div"></div>
+
+  <script type="text/javascript">
+    var playerLoaded = false;
+
+    var fish;
+
+    var modelMatrix = mat4.create();
+    var viewMatrix = mat4.create();
+    var projectionMatrix = mat4.create();
+
+    glSetup("mainGame");
+
+    sceneSetup();
+    tick();
+
+  </script>
+
+</html>
