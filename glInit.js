@@ -7,13 +7,7 @@ function glSetup(canvasId) {
 
   initGl(canvas);
   initShaders();
-  initMatrices();
-}
-
-function initMatrices() {
-  mat4.identity(modelMatrix);
-  mat4.identity(viewMatrix);
-  mat4.identity(projectionMatrix);
+  setKeyboardHandlers();
 }
 
 function initGl(canvas) {

@@ -5,7 +5,7 @@
 
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
-    <script type="text/javascript" src="libraries/glMatrix-0.9.5.min.js"></script>
+    <script type="text/javascript" src="libraries/gl-matrix-min.js"></script>
     <script type="text/javascript" src="libraries/webgl-utils.js"></script>
     <script type="text/javascript" src="libraries/webgl-obj-loader.js"></script>
 
@@ -41,6 +41,8 @@
 
     <script type="text/javascript" src="glInit.js"></script>
     <script type="text/javascript" src="render.js"></script>
+    <script type="text/javascript" src="camera.js"></script>
+    <script type="text/javascript" src="keyboard.js"></script>
 
   </head>
 
@@ -53,19 +55,17 @@
   </body>
 
   <div id="fish_mesh_div"></div>
+  <div id="terrain_mesh_div"></div>
 
   <script type="text/javascript">
-    var playerLoaded = false;
+    var playerLoaded = false, terrainLoaded = false;
 
-    var fish;
-
-    var modelMatrix = mat4.create();
-    var viewMatrix = mat4.create();
-    var projectionMatrix = mat4.create();
+    var fish, terrain;
+    var camera = {};
 
     glSetup("mainGame");
 
-    sceneSetup();
+    sceneSetup("fish_mesh_div", "terrain_mesh_div");
     tick();
 
   </script>
